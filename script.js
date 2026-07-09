@@ -17,297 +17,337 @@ const terms = document.getElementById("terms");
 const popup = document.getElementById("popup");
 const okBtn = document.getElementById("okBtn");
 
-const togglePassword =
-document.getElementById("togglePassword");
+const togglePassword = document.getElementById("togglePassword");
+const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
 
-const toggleConfirmPassword =
-document.getElementById("toggleConfirmPassword");
-
-const strengthBar =
-document.getElementById("strengthBar");
-
-const strengthText =
-document.getElementById("strengthText");
+const strengthBar = document.getElementById("strengthBar");
+const strengthText = document.getElementById("strengthText");
 
 // ===================================
 // SHOW / HIDE PASSWORD
 // ===================================
 
-togglePassword.onclick = function(){
+togglePassword.addEventListener("click", function () {
 
-password.type =
-password.type === "password"
-? "text"
-: "password";
+    if (password.type === "password") {
 
-this.innerHTML =
-password.type === "password"
-? '<i class="fa-solid fa-eye"></i>'
-: '<i class="fa-solid fa-eye-slash"></i>';
+        password.type = "text";
 
-}
+        this.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
 
-toggleConfirmPassword.onclick = function(){
+    } else {
 
-confirmPassword.type =
-confirmPassword.type === "password"
-? "text"
-: "password";
+        password.type = "password";
 
-this.innerHTML =
-confirmPassword.type === "password"
-? '<i class="fa-solid fa-eye"></i>'
-: '<i class="fa-solid fa-eye-slash"></i>';
+        this.innerHTML = '<i class="fa-solid fa-eye"></i>';
 
-}
+    }
+
+});
+
+toggleConfirmPassword.addEventListener("click", function () {
+
+    if (confirmPassword.type === "password") {
+
+        confirmPassword.type = "text";
+
+        this.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+
+    } else {
+
+        confirmPassword.type = "password";
+
+        this.innerHTML = '<i class="fa-solid fa-eye"></i>';
+
+    }
+
+});
 
 // ===================================
 // PASSWORD STRENGTH
 // ===================================
 
-password.addEventListener("keyup",function(){
+password.addEventListener("input", function () {
 
-let pass=password.value;
+    let pass = password.value;
 
-let strength=0;
+    let strength = 0;
 
-if(pass.length>=8)
-strength++;
+    if (pass.length >= 8) strength++;
 
-if(/[A-Z]/.test(pass))
-strength++;
+    if (/[A-Z]/.test(pass)) strength++;
 
-if(/[0-9]/.test(pass))
-strength++;
+    if (/[a-z]/.test(pass)) strength++;
 
-if(/[!@#$%^&*]/.test(pass))
-strength++;
+    if (/[0-9]/.test(pass)) strength++;
 
-if(strength==0){
+    if (/[^A-Za-z0-9]/.test(pass)) strength++;
 
-strengthBar.style.width="0%";
+    if (strength <= 1) {
 
-strengthText.innerHTML="";
+        strengthBar.style.width = "20%";
+        strengthBar.style.background = "#ff3b30";
+        strengthText.innerHTML = "Weak Password";
+
+    }
+
+    else if (strength == 2 || strength == 3) {
+
+        strengthBar.style.width = "60%";
+        strengthBar.style.background = "#ff9500";
+        strengthText.innerHTML = "Medium Password";
+
+    }
+
+    else {
+
+        strengthBar.style.width = "100%";
+        strengthBar.style.background = "#2ed573";
+        strengthText.innerHTML = "Strong Password";
+
+    }
+
+    if (pass.length == 0) {
+
+        strengthBar.style.width = "0%";
+        strengthText.innerHTML = "";
+
+    }
+
+});
+
+// ===================================
+// ERROR FUNCTIONS
+// ===================================
+
+function showError(input, message) {
+
+    const error = input.parentElement.querySelector(".error");
+
+    error.innerHTML = message;
+
+    input.classList.add("input-error");
+
+    input.classList.remove("input-success");
 
 }
 
-else if(strength==1){
+function showSuccess(input) {
 
-strengthBar.style.width="25%";
+    const error = input.parentElement.querySelector(".error");
 
-strengthBar.style.background="#ff3b30";
+    error.innerHTML = "";
 
-strengthText.innerHTML="Weak Password";
+    input.classList.remove("input-error");
+
+    input.classList.add("input-success");
+
+}
+// ===================================
+// FORM VALIDATION
+// ===================================
+
+form.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+let valid=true;
+
+// First Name
+if(firstName.value.trim()==""){
+
+showError(firstName,"First Name is required");
+
+valid=false;
+
+}else{
+
+showSuccess(firstName);
 
 }
 
-else if(strength==2){
+// Last Name
+if(lastName.value.trim()==""){
 
-strengthBar.style.width="50%";
+showError(lastName,"Last Name is required");
 
-strengthBar.style.background="#ff9500";
+valid=false;
 
-strengthText.innerHTML="Medium Password";
+}else{
+
+showSuccess(lastName);
 
 }
 
-else if(strength==3){
+// Email
 
-strengthBar.style.width="75%";
+const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-strengthBar.style.background="#ffd60a";
+if(email.value.trim()==""){
 
-strengthText.innerHTML="Good Password";
+showError(email,"Email is required");
+
+valid=false;
+
+}
+
+else if(!emailPattern.test(email.value)){
+
+showError(email,"Enter valid email");
+
+valid=false;
 
 }
 
 else{
 
-strengthBar.style.width="100%";
-
-strengthBar.style.background="#22c55e";
-
-strengthText.innerHTML="Strong Password";
+showSuccess(email);
 
 }
 
-});
+// Password
 
-// ===================================
-// VALIDATION FUNCTIONS
-// ===================================
+if(password.value.length<8){
 
-function showError(input,message){
+showError(password,"Minimum 8 characters required");
 
-const error =
-input.parentElement.querySelector(".error");
+valid=false;
 
-if(error){
+}else{
 
-error.innerHTML = message;
+showSuccess(password);
 
 }
 
-input.classList.add("input-error");
+// Confirm Password
+
+if(confirmPassword.value==""){
+
+showError(confirmPassword,"Confirm Password is required");
+
+valid=false;
+
+}
+
+else if(password.value!==confirmPassword.value){
+
+showError(confirmPassword,"Password does not match");
+
+valid=false;
+
+}
+
+else{
+
+showSuccess(confirmPassword);
+
+}
+
+// Gender
+
+const gender=document.querySelector('input[name="gender"]:checked');
+
+const genderError=document.querySelector(".gender-box .error");
+
+if(!gender){
+
+genderError.innerHTML="Please select gender";
+
+valid=false;
+
+}else{
+
+genderError.innerHTML="";
+
+}
+
+// Course
+
+if(course.value==""){
+
+showError(course,"Please select course");
+
+valid=false;
+
+}else{
+
+showSuccess(course);
+
+}
+
+// Phone Number
+
+const phoneError=document.querySelector(".phone-container + .error");
+
+const phonePattern=/^[0-9]{10}$/;
+
+if(phone.value.trim()==""){
+
+phoneError.innerHTML="Phone number is required";
+
+valid=false;
+
+}
+
+else if(!phonePattern.test(phone.value)){
+
+phoneError.innerHTML="Enter valid 10 digit number";
+
+valid=false;
+
+}
+
+else{
+
+phoneError.innerHTML="";
+
+}
+
+// Address
+
+if(address.value.trim()==""){
+
+showError(address,"Address is required");
+
+valid=false;
+
+}else{
+
+showSuccess(address);
+
+}
+
+// Terms
+
+if(!terms.checked){
+
+alert("Please accept Terms & Conditions");
+
+valid=false;
+
+}
+
+// ===========================
+// SUCCESS POPUP
+// ===========================
+
+if(valid){
+
+popup.style.display="flex";
+
+form.reset();
+
+strengthBar.style.width="0%";
+
+strengthText.innerHTML="";
+
+document.querySelectorAll(".input-success").forEach(function(input){
 
 input.classList.remove("input-success");
 
-}
-
-function showSuccess(input){
-
-const error =
-input.parentElement.querySelector(".error");
-
-if(error){
-
-error.innerHTML="";
+});
 
 }
-
-input.classList.remove("input-error");
-
-input.classList.add("input-success");
-
-}
-// ===================================
-// FORM SUBMIT VALIDATION
-// ===================================
-
-form.addEventListener("submit", function (e) {
-
-    e.preventDefault();
-
-    let valid = true;
-
-    document.querySelectorAll(".error").forEach(error => {
-        error.innerHTML = "";
-    });
-
-    document.querySelectorAll(".input-error").forEach(input => {
-        input.classList.remove("input-error");
-    });
-
-    document.querySelectorAll(".input-success").forEach(input => {
-        input.classList.remove("input-success");
-    });
-
-    // First Name
-    if (firstName.value.trim() === "") {
-        showError(firstName, "First Name is required");
-        valid = false;
-    } else {
-        showSuccess(firstName);
-    }
-
-    // Last Name
-    if (lastName.value.trim() === "") {
-        showError(lastName, "Last Name is required");
-        valid = false;
-    } else {
-        showSuccess(lastName);
-    }
-
-    // Email
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-    if (email.value.trim() === "") {
-        showError(email, "Email is required");
-        valid = false;
-    }
-    else if (!emailPattern.test(email.value)) {
-        showError(email, "Enter a valid Email");
-        valid = false;
-    }
-    else {
-        showSuccess(email);
-    }
-
-    // Password
-    if (password.value.length < 8) {
-        showError(password, "Minimum 8 characters required");
-        valid = false;
-    } else {
-        showSuccess(password);
-    }
-
-    // Confirm Password
-    if (confirmPassword.value === "") {
-        showError(confirmPassword, "Confirm Password");
-        valid = false;
-    }
-    else if (confirmPassword.value !== password.value) {
-        showError(confirmPassword, "Passwords do not match");
-        valid = false;
-    }
-    else {
-        showSuccess(confirmPassword);
-    }
-
-    // Gender
-    const gender = document.querySelector('input[name="gender"]:checked');
-
-    if (!gender) {
-        document.querySelector(".gender-box .error").innerHTML =
-            "Select Gender";
-        valid = false;
-    }
-
-    // Course
-    if (course.value === "") {
-        course.parentElement.querySelector(".error").innerHTML =
-            "Select Course";
-        valid = false;
-    } else {
-        showSuccess(course);
-    }
-
-    // Phone Number
-    const phonePattern = /^[0-9]{10}$/;
-
-    if (phone.value.trim() === "") {
-        document.querySelector(".phone-container + .error").innerHTML =
-            "Phone Number is required";
-        valid = false;
-    }
-    else if (!phonePattern.test(phone.value)) {
-        document.querySelector(".phone-container + .error").innerHTML =
-            "Enter valid 10 digit Phone Number";
-        valid = false;
-    }
-    else {
-        document.querySelector(".phone-container + .error").innerHTML = "";
-    }
-
-    // Address
-    if (address.value.trim() === "") {
-        showError(address, "Address is required");
-        valid = false;
-    } else {
-        showSuccess(address);
-    }
-
-    // Terms
-    if (!terms.checked) {
-        alert("Please accept Terms & Conditions.");
-        valid = false;
-    }
-
-    // Success Popup
-    if (valid) {
-
-        popup.style.display = "flex";
-
-        form.reset();
-
-        strengthBar.style.width = "0%";
-        strengthText.innerHTML = "";
-
-        document.querySelectorAll(".input-success").forEach(input => {
-            input.classList.remove("input-success");
-        });
-
-    }
 
 });
 
@@ -315,12 +355,20 @@ form.addEventListener("submit", function (e) {
 // POPUP CLOSE
 // ===================================
 
-okBtn.addEventListener("click", function () {
-    popup.style.display = "none";
+okBtn.addEventListener("click",function(){
+
+popup.style.display="none";
+
 });
 
-window.addEventListener("click", function (e) {
-    if (e.target === popup) {
-        popup.style.display = "none";
-    }
+// Close popup on outside click
+
+window.addEventListener("click",function(e){
+
+if(e.target===popup){
+
+popup.style.display="none";
+
+}
+
 });
