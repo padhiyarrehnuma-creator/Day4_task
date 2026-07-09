@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Registration Form</title>
 
 <link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -22,7 +30,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 <h2>Registration Form</h2>
 
-<form id="registrationForm">
+<form id="registrationForm" autocomplete="off">
 
 <!-- First Name -->
 
@@ -33,12 +41,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 <input
 type="text"
 id="firstName"
-required
-placeholder=" ">
+name="firstName"
+placeholder=" "
+required>
 
-<label for="firstName">
-First Name
-</label>
+<label for="firstName">First Name</label>
 
 <small class="error"></small>
 
@@ -53,12 +60,11 @@ First Name
 <input
 type="text"
 id="lastName"
-required
-placeholder=" ">
+name="lastName"
+placeholder=" "
+required>
 
-<label for="lastName">
-Last Name
-</label>
+<label for="lastName">Last Name</label>
 
 <small class="error"></small>
 
@@ -73,16 +79,16 @@ Last Name
 <input
 type="email"
 id="email"
-required
-placeholder=" ">
+name="email"
+placeholder=" "
+required>
 
-<label for="email">
-Email Address
-</label>
+<label for="email">Email Address</label>
 
 <small class="error"></small>
 
 </div>
+
 <!-- Password -->
 
 <div class="input-box">
@@ -92,15 +98,16 @@ Email Address
 <input
 type="password"
 id="password"
-required
-placeholder=" ">
+name="password"
+placeholder=" "
+required>
 
-<label for="password">
-Password
-</label>
+<label for="password">Password</label>
 
 <span class="toggle-password" id="togglePassword">
+
 <i class="fa-solid fa-eye"></i>
+
 </span>
 
 <small class="error"></small>
@@ -124,22 +131,24 @@ Password
 <input
 type="password"
 id="confirmPassword"
-required
-placeholder=" ">
+name="confirmPassword"
+placeholder=" "
+required>
 
-<label for="confirmPassword">
-Confirm Password
-</label>
+<label for="confirmPassword">Confirm Password</label>
 
 <span class="toggle-password" id="toggleConfirmPassword">
+
 <i class="fa-solid fa-eye"></i>
+
 </span>
 
 <small class="error"></small>
 
 </div>
-
-<!-- Gender -->
+<!-- ==========================
+     GENDER
+========================== -->
 
 <div class="gender-box">
 
@@ -168,25 +177,27 @@ Other
 
 </div>
 
-<!-- Course -->
+<!-- ==========================
+     COURSE
+========================== -->
 
 <div class="input-box">
 
 <i class="fa-solid fa-graduation-cap"></i>
 
-<select id="course" required>
+<select id="course" name="course" required>
 
-<option value="">Select Course</option>
+<option value="" selected disabled>Select Course</option>
 
-<option>BCA</option>
+<option value="BCA">BCA</option>
 
-<option>BBA</option>
+<option value="BBA">BBA</option>
 
-<option>B.Com</option>
+<option value="B.Com">B.Com</option>
 
-<option>B.Sc</option>
+<option value="B.Sc">B.Sc</option>
 
-<option>B.Tech</option>
+<option value="B.Tech">B.Tech</option>
 
 </select>
 
@@ -194,17 +205,17 @@ Other
 
 </div>
 
-<!-- Phone Number -->
+<!-- ==========================
+     PHONE NUMBER
+========================== -->
 
-<label class="phone-label">
-Phone Number
-</label>
+<label class="phone-label">Phone Number</label>
 
 <div class="phone-container">
 
 <div class="country-box">
 
-<select id="countryCode">
+<select id="countryCode" name="countryCode">
 
 <option value="+91">🇮🇳 +91</option>
 
@@ -227,9 +238,10 @@ Phone Number
 <input
 type="tel"
 id="phone"
+name="phone"
+placeholder="Enter Phone Number"
 maxlength="10"
-required
-placeholder="Enter Phone Number">
+required>
 
 </div>
 
@@ -237,7 +249,9 @@ placeholder="Enter Phone Number">
 
 <small class="error"></small>
 
-<!-- Address -->
+<!-- ==========================
+     ADDRESS
+========================== -->
 
 <div class="input-box">
 
@@ -245,20 +259,39 @@ placeholder="Enter Phone Number">
 
 <textarea
 id="address"
-required
-placeholder=" ">
-</textarea>
+name="address"
+placeholder=" "
+required></textarea>
 
-<label for="address">
-Address
-</label>
+<label for="address">Address</label>
 
 <small class="error"></small>
 
 </div>
 
+<!-- ==========================
+     TERMS
+========================== -->
 
-<!-- Register Button -->
+<div class="checkbox-box">
+
+<label>
+
+<input
+type="checkbox"
+id="terms"
+required>
+
+I agree to the
+<strong>Terms & Conditions</strong>
+
+</label>
+
+</div>
+
+<!-- ==========================
+     REGISTER BUTTON
+========================== -->
 
 <div class="button-box">
 
@@ -280,7 +313,9 @@ Register Now
 
 </div>
 
-<!-- Success Popup -->
+<!-- ==========================
+     SUCCESS POPUP
+========================== -->
 
 <div class="popup" id="popup">
 
@@ -290,9 +325,7 @@ Register Now
 
 <h2>Registration Successful!</h2>
 
-<p>
-Your registration has been completed successfully.
-</p>
+<p>Your registration has been completed successfully.</p>
 
 <button id="okBtn">
 OK
