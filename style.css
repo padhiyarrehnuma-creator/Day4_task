@@ -1,0 +1,665 @@
+/* =====================================
+   GOOGLE FONT
+===================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+/* =====================================
+   BODY
+===================================== */
+
+body{
+
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:35px;
+
+background:linear-gradient(-45deg,
+#FF6B6B,
+#FF9F43,
+#FFD166,
+#F72585,
+#FF7F50);
+
+background-size:400% 400%;
+animation:bgAnimation 12s ease infinite;
+
+}
+
+@keyframes bgAnimation{
+
+0%{background-position:0% 50%;}
+
+50%{background-position:100% 50%;}
+
+100%{background-position:0% 50%;}
+
+}
+
+/* =====================================
+   CONTAINER
+===================================== */
+
+.container{
+
+width:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+
+}
+
+.form-box{
+
+width:100%;
+max-width:720px;
+
+padding:40px;
+
+border-radius:28px;
+
+background:rgba(255,255,255,.18);
+
+backdrop-filter:blur(20px);
+
+border:2px solid rgba(255,255,255,.25);
+
+box-shadow:0 20px 45px rgba(0,0,0,.25);
+
+transition:.35s;
+
+}
+
+.form-box:hover{
+
+transform:translateY(-5px);
+
+}
+
+.form-box h2{
+
+text-align:center;
+
+font-size:35px;
+
+font-weight:700;
+
+margin-bottom:35px;
+
+color:#fff;
+
+letter-spacing:1px;
+
+}
+
+/* =====================================
+   INPUT FIELD
+===================================== */
+
+.input-box{
+
+position:relative;
+
+margin-bottom:25px;
+
+}
+
+.input-box input,
+.input-box textarea,
+.input-box select{
+
+width:100%;
+
+padding:18px 20px 18px 55px;
+
+border-radius:16px;
+
+border:2px solid rgba(255,255,255,.30);
+
+background:rgba(255,255,255,.10);
+
+font-size:16px;
+
+color:#fff;
+
+outline:none;
+
+transition:.35s;
+
+}
+
+.input-box textarea{
+
+height:130px;
+
+resize:none;
+
+padding-top:22px;
+
+}
+
+.input-box input::placeholder,
+.input-box textarea::placeholder{
+
+color:transparent;
+
+}
+
+/* =====================================
+   INPUT ACTIVE EFFECT
+===================================== */
+
+.input-box input:focus,
+.input-box textarea:focus,
+.input-box select:focus{
+
+border-color:#FFE66D;
+
+background:rgba(255,230,109,.20);
+
+box-shadow:0 0 20px rgba(255,230,109,.40);
+
+}
+
+/* typing ke baad */
+
+.input-box input:not(:placeholder-shown),
+.input-box textarea:not(:placeholder-shown){
+
+background:rgba(255,255,255,.18);
+
+border-color:#FFD166;
+
+}
+
+/* =====================================
+   FLOATING LABEL
+===================================== */
+
+.input-box label{
+
+position:absolute;
+
+left:55px;
+
+top:18px;
+
+pointer-events:none;
+
+transition:.3s;
+
+color:#fff;
+
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label,
+.input-box textarea:focus~label,
+.input-box textarea:valid~label{
+
+top:-11px;
+
+left:45px;
+
+padding:2px 10px;
+
+font-size:12px;
+
+border-radius:15px;
+
+background:#FF6B6B;
+
+color:#fff;
+
+font-weight:600;
+
+}
+
+/* =====================================
+   ICONS
+===================================== */
+
+.input-box i{
+
+position:absolute;
+
+left:18px;
+
+top:20px;
+
+font-size:20px;
+
+color:#fff;
+
+}
+
+/* =====================================
+   SHOW / HIDE PASSWORD
+===================================== */
+
+.toggle-password{
+
+position:absolute;
+
+right:18px;
+
+left:210px;
+
+top:3px;
+
+cursor:pointer;
+
+font-size:19px;
+
+color:#fff;
+
+}
+
+/* =====================================
+   GENDER
+===================================== */
+
+.gender-box{
+
+margin:25px 0;
+
+}
+
+.gender-box h3{
+
+color:#fff;
+
+margin-bottom:12px;
+
+font-size:18px;
+
+}
+
+.gender-option{
+
+display:flex;
+
+gap:25px;
+
+flex-wrap:wrap;
+
+}
+
+.gender-option label{
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+color:#fff;
+
+font-size:16px;
+
+cursor:pointer;
+
+}
+
+/* =====================================
+   COURSE
+===================================== */
+
+select{
+
+cursor:pointer;
+
+}
+
+select option{
+
+color:#000;
+
+background:#fff;
+
+  }
+
+/* =====================================
+   PHONE NUMBER
+===================================== */
+
+.phone-label{
+display:block;
+font-size:18px;
+font-weight:600;
+color:#fff;
+margin-bottom:12px;
+}
+
+.phone-container{
+display:flex;
+align-items:center;
+width:100%;
+height:65px;
+background:rgba(255,255,255,.10);
+border:2px solid rgba(255,255,255,.30);
+border-radius:16px;
+overflow:hidden;
+margin-bottom:25px;
+transition:.35s;
+}
+
+.phone-container:focus-within{
+border-color:#FFE66D;
+background:rgba(255,230,109,.18);
+box-shadow:0 0 18px rgba(255,230,109,.35);
+}
+
+.country-box{
+width:130px;
+height:100%;
+border-right:2px solid rgba(255,255,255,.25);
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.country-box select{
+width:100%;
+height:100%;
+background:transparent;
+border:none;
+outline:none;
+color:#fff;
+font-size:16px;
+padding:0 10px;
+cursor:pointer;
+}
+
+.country-box option{
+color:#000;
+}
+
+.phone-box{
+flex:1;
+display:flex;
+align-items:center;
+gap:15px;
+padding:0 15px;
+}
+
+.phone-box i{
+color:#fff;
+font-size:19px;
+}
+
+.phone-box input{
+flex:1;
+height:100%;
+background:transparent;
+border:none;
+outline:none;
+font-size:16px;
+color:#fff;
+}
+
+.phone-box input::placeholder{
+color:rgba(255,255,255,.75);
+}
+
+/* =====================================
+   PASSWORD STRENGTH
+===================================== */
+
+.strength{
+width:100%;
+height:8px;
+background:rgba(255,255,255,.20);
+border-radius:20px;
+overflow:hidden;
+margin-top:-10px;
+margin-bottom:8px;
+}
+
+#strengthBar{
+width:0%;
+height:100%;
+background:#ff4757;
+transition:.4s;
+}
+
+#strengthText{
+color:#fff;
+font-size:14px;
+margin-bottom:20px;
+}
+
+/* =====================================
+   ADDRESS
+===================================== */
+
+textarea{
+min-height:120px;
+}
+
+/* =====================================
+   CHECKBOX
+===================================== */
+
+.checkbox-box{
+margin:20px 0;
+}
+
+.checkbox-box label{
+display:flex;
+align-items:center;
+gap:10px;
+color:#fff;
+font-size:15px;
+cursor:pointer;
+}
+
+.checkbox-box input{
+width:18px;
+height:18px;
+accent-color:#FF6B6B;
+}
+
+/* =====================================
+   ERROR
+===================================== */
+
+.error{
+display:block;
+font-size:13px;
+margin-top:5px;
+color:#fff3cd;
+min-height:18px;
+}
+
+.input-error{
+border-color:#ff3b30!important;
+}
+
+.input-success{
+border-color:#2ed573!important;
+}
+
+/* =====================================
+   BUTTON
+===================================== */
+
+.button-box{
+margin-top:25px;
+}
+
+#registerBtn{
+width:100%;
+padding:16px;
+border:none;
+border-radius:16px;
+font-size:18px;
+font-weight:600;
+cursor:pointer;
+color:#fff;
+background:linear-gradient(135deg,#FF6B6B,#FF9F43);
+transition:.35s;
+box-shadow:0 12px 25px rgba(0,0,0,.25);
+}
+
+#registerBtn:hover{
+transform:translateY(-4px);
+background:linear-gradient(135deg,#F72585,#FF6B6B);
+}
+
+#registerBtn i{
+margin-right:8px;
+}
+
+/* =====================================
+   POPUP
+===================================== */
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:none;
+justify-content:center;
+align-items:center;
+background:rgba(0,0,0,.55);
+z-index:999;
+}
+
+.popup-content{
+width:380px;
+max-width:90%;
+background:#fff;
+padding:35px;
+border-radius:22px;
+text-align:center;
+animation:popup .35s ease;
+}
+
+@keyframes popup{
+from{
+transform:scale(.6);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.success-icon{
+font-size:70px;
+color:#2ed573;
+margin-bottom:15px;
+}
+
+.popup-content h2{
+color:#333;
+margin-bottom:10px;
+}
+
+.popup-content p{
+color:#666;
+margin-bottom:20px;
+}
+
+#okBtn{
+padding:12px 30px;
+border:none;
+border-radius:12px;
+background:#FF6B6B;
+color:#fff;
+font-size:16px;
+cursor:pointer;
+}
+
+#okBtn:hover{
+background:#F72585;
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media(max-width:768px){
+
+body{
+padding:15px;
+}
+
+.form-box{
+padding:25px;
+}
+
+.form-box h2{
+font-size:28px;
+}
+
+.gender-option{
+flex-direction:column;
+gap:12px;
+}
+
+.phone-container{
+height:60px;
+}
+
+.country-box{
+width:105px;
+}
+
+.phone-box{
+gap:10px;
+padding:0 10px;
+}
+
+.phone-box input{
+font-size:15px;
+}
+
+.input-box input,
+.input-box textarea,
+.input-box select{
+font-size:15px;
+}
+
+#registerBtn{
+font-size:16px;
+}
+
+.popup-content{
+width:95%;
+}
+
+}
+
+@media(max-width:480px){
+
+.form-box{
+padding:20px;
+}
+
+.form-box h2{
+font-size:24px;
+}
+
+.country-box{
+width:95px;
+}
+
+.phone-label{
+font-size:16px;
+}
+
+}
